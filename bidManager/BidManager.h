@@ -2,16 +2,29 @@
  * BidManager.h
  *
  *  Created on: Feb 5, 2020
- *      Author: nithy
+ *      Author: 269069
  */
 
-#ifndef BIDMANAGER_BIDMANAGER_H_
-#define BIDMANAGER_BIDMANAGER_H_
+#ifndef BIDMANAGER_H_
+#define BIDMANAGER_H_
+
+#include "interfaces/iResponseParser.h"
+#include "interfaces/iTemplateGenerator.h"
+#include "bid/bid.h
+#include <vector>
 
 class BidManager {
-public:
-	BidManager();
-	virtual ~BidManager();
+
+      iResponseParser& responseParser;
+      iTemplateGenerator& templateGenerator;
+      std::vector<Bid> bids;
+      Bid& getSelectedBid();
+
+   public:
+      BidManager(iResponseParser& respParser, iTemplateGenerator& templateGen):
+               responseParser(respParser), templateGenerator(templateGen) {}
+      virtual ~BidManager();
+      void run();
 };
 
-#endif /* BIDMANAGER_BIDMANAGER_H_ */
+#endif /* BIDMANAGER_H_ */
