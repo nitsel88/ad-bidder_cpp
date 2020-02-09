@@ -1,4 +1,4 @@
-##C++ implementation of ad-bidder. 
+## C++ implementation of ad-bidder. 
 
 IDE used Microsoft Visual Studio 2019 community Edition.
 
