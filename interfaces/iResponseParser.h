@@ -1,16 +1,15 @@
 /*
- * iResponseParser.h
- *
- *  Created on: Feb 5, 2020
- *      Author: 269069
- */
-
+response parser - abstract class 
+*/
 #ifndef IRESPONSEPARSER_H_
 #define IRESPONSEPARSER_H_
 
+#include <vector>
+#include "../bid/Bid.h"
+
 class iResponseParser {
    public:
-      virtual void getBids() = 0;
+      virtual std::vector<Bid> getBids() = 0;
       virtual ~iResponseParser() = default;
 };
 

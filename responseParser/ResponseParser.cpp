@@ -1,40 +1,38 @@
-/*
- * ResponseParser.cpp
- *
- *  Created on: Feb 5, 2020
- *      Author: nithy
- */
-
 #include "ResponseParser.h"
+#include <stdexcept>
 
 void ResponseParser::parseBids() {
    std::stringstream tmp;
-   tmp << fileStream.rdbuf();
+
+   tmp << inputFileStream.rdbuf();
    std::string s = tmp.str();
    const char *inputJsonStr = s.c_str();
 
    //Parse the char string to JSON
    doc.Parse(inputJsonStr);
-
-   //get the bid details from JSON to a vector
-   for (auto const& seatBid : doc["seatbid"].GetArray()) {
-      for (auto const& bid : seatBid["bid"].GetArray()) {
-         std:string bidId = bid["id"].GetString();
-         std:string markUp = bid["adm"].GetString();
-         float price = bid["price"].GetString();
-         bids.push_back(Bid(bidId, markUp, price));
-      }
+   if (doc.ObjectEmpty()) {
+       throw std::runtime_error("Json object is empty");
    }
-
+   else {
+       //get the bid details from JSON to a vector of bid objects
+       for (auto const& seatBid : doc["seatbid"].GetArray()) {
+           for (auto const& bid : seatBid["bid"].GetArray()) {
+               auto bidId = bid["id"].GetString();
+               auto markUp = bid["adm"].GetString();
+               double price = bid["price"].GetDouble();
+               bids.push_back(Bid(bidId, markUp, price));
+           }
+       }
+   }
 }
 
 ResponseParser::ResponseParser(std::string s) {
    inputFileStream = std::ifstream(s.c_str());
    //Read the file stream to char
-   if (inputFileStream.is_open()) {
-      parseBids();
+   if (!inputFileStream.is_open()) {
+       throw std::runtime_error("Error opening bid-response.json");
    } else {
-      std::cout << "unable to open file";
+      parseBids();
    }
 }
 

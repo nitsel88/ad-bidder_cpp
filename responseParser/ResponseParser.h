@@ -1,13 +1,16 @@
 /*
- * ResponseParser.h
- *
- *  Created on: Feb 5, 2020
- *      Author: nithy
- */
-
+ResponseParser - Has JSON response parsing logic
+*/
 #ifndef RESPONSEPARSER_RESPONSEPARSER_H_
 #define RESPONSEPARSER_RESPONSEPARSER_H_
 
+
+#include "../thirdParty/rapidjson/include/rapidjson/document.h"
+#include "../thirdParty/rapidjson/include/rapidjson/writer.h"
+#include "../thirdParty/rapidjson/include/rapidjson/stringbuffer.h"
+
+#include "../interfaces/iResponseParser.h"
+#include "../bid/Bid.h"
 
 #include <iostream>
 #include <string>
@@ -15,17 +18,9 @@
 #include <sstream>
 #include <vector>
 
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
-
-#include "interfaces/iResponseParser.h"
-#include "bid/bid.h"
-
 class ResponseParser : public iResponseParser {
 
 private:
-   std::istream& input;
    std::vector<Bid> bids;
    std::ifstream inputFileStream;
    rapidjson::Document doc;

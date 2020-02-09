@@ -1,17 +1,15 @@
 /*
- * iTemplateGenerator.h
- *
- *  Created on: Feb 5, 2020
- *      Author: 269069
- */
-
+template generator- abstract class
+*/
 #ifndef ITEMPLATEGENERATOR_H_
 #define ITEMPLATEGENERATOR_H_
+
+#include<string>
 
 class iTemplateGenerator {
 
    public:
-      virtual void generateTemplate() = 0;
+      virtual void generateTemplate(std::string) = 0;
       virtual ~iTemplateGenerator() = default;
 };
 

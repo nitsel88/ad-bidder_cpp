@@ -1,20 +1,20 @@
 /*
- * TemplateGenerator.h
- *
- *  Created on: Feb 5, 2020
- *      Author: nithy
- */
-
+Template generator
+*/
 #ifndef TEMPLATEGENERATOR_TEMPLATEGENERATOR_H_
 #define TEMPLATEGENERATOR_TEMPLATEGENERATOR_H_
 
-#include "interfaces/iTemplateGenerator.h"
+#include "../interfaces/iTemplateGenerator.h"
+#include "../thirdParty/HtmlBuilder/include/HTML/HTML.h"
 #include <string>
 #include <fstream>
+#include <iostream>
+
 
 class TemplateGenerator: public iTemplateGenerator {
 
 std::ofstream ofs;
+std::string formatMarkup(std::string);
 
 public:
 	TemplateGenerator(std::string);
